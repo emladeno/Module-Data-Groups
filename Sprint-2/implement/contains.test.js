@@ -1,5 +1,3 @@
-const contains = require("./contains.js");
-
 /*
 Implement a function called contains that checks an object contains a
 particular property
@@ -32,3 +30,23 @@ as the object doesn't contains a key of 'c'
 // Given invalid parameters like arrays
 // When passed to contains
 // Then it should return false or throw an error
+
+const contains = require("./contains.js");
+
+describe("contains", () => {
+  it("returns true when the object contains the key specified", () => {
+    expect(contains({ a: 1, b: 2 }, "a")).toBeTruthy();
+  });
+
+  it("returns false when the object does not contain the key specified", () => {
+    expect(contains({ a: 1, b: 2 }, "c")).toBeFalsy();
+  });
+
+  it("returns false when the object is empty", () => {
+    expect(contains({}, "c")).toBeFalsy();
+  });
+
+  it("returns false when an array is used rather than an object", () => {
+    expect(contains(["c"], "c")).toBeFalsy();
+  });
+});
