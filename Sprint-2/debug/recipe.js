@@ -10,6 +10,11 @@ const recipe = {
   ingredients: ["olive oil", "tomatoes", "salt", "pepper"],
 };
 
-console.log(`${recipe.title} serves ${recipe.serves}
-  ingredients:
-${recipe}`);
+// \n inserts a newline when logging a string, you could also put another console.log('Ingredients:') on the next line
+// similiar to how I logged the ingredients
+
+console.log(`${recipe.title} serves ${recipe.serves} \nIngredients: `);
+
+for (const ingredient of recipe.ingredients) {
+  console.log(ingredient);
+}

@@ -11,6 +11,8 @@ const author = {
   alive: true,
 };
 
-for (const value of author) {
+// You can't iterate the fields in an object, but you can extract the values to an array and then iterate
+
+for (const value of Object.values(author)) {
   console.log(value);
 }
