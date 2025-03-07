@@ -3,9 +3,27 @@
 // If you're in the Sprint-1 directory, you can run `npm test -- fix` to run the tests in the fix directory
 
 function calculateMedian(list) {
+  if (!list.length) {
+    throw new Error ("Array can not be empty.");
+  }
+  const sortedNumbers = [...list].sort((a, b) => a - b);
   const middleIndex = Math.floor(list.length / 2);
-  const median = list.splice(middleIndex, 1)[0];
-  return median;
+  
+  if (sortedNumbers.length % 2 === 1 ) {
+ return sortedNumbers [middleIndex];
+  }
+  else {
+   const middle1 = sortedNumbers [middleIndex - 1];
+   const middle2 = sortedNumbers [middleIndex];
+   return (middle1 + middle2) / 2;
+  }
+
+  
 }
+console.log(calculateMedian([3, 1, 2]));      
+console.log(calculateMedian([4, 1, 7, 3]));   
+console.log(calculateMedian([10, 20, 30]));   
+console.log(calculateMedian([5]));           
+console.log(calculateMedian([]));    
 
 module.exports = calculateMedian;
