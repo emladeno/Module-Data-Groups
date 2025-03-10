@@ -7,7 +7,7 @@ function calculateMedian(list) {
     throw new Error ("Array can not be empty.");
   }
   const sortedNumbers = [...list].sort((a, b) => a - b);
-  const middleIndex = Math.floor(list.length / 2);
+  const middleIndex = Math.floor(sortedNumbers.length / 2);
   
   if (sortedNumbers.length % 2 === 1 ) {
  return sortedNumbers [middleIndex];
@@ -20,10 +20,6 @@ function calculateMedian(list) {
 
   
 }
-console.log(calculateMedian([3, 1, 2]));      
-console.log(calculateMedian([4, 1, 7, 3]));   
-console.log(calculateMedian([10, 20, 30]));   
-console.log(calculateMedian([5]));           
-console.log(calculateMedian([]));    
+    
 
 module.exports = calculateMedian;
