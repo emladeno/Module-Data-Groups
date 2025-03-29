@@ -21,3 +21,26 @@ const books = [
   },
 ];
 
+
+function renderReadingList() {
+  const readingList = document.getElementById("reading-list");
+  readingList.innerHTML = ""; // Clear existing content
+
+  books.forEach((book) => {
+    const li = document.createElement("li");
+    li.style.backgroundColor = book.alreadyRead ? "green" : "red";
+    
+    const title = document.createElement("p");
+    title.textContent = `${book.title} by ${book.author}`;
+
+    const img = document.createElement("img");
+    img.src = book.bookCoverImage;
+    img.alt = `${book.title} cover`;
+
+    li.appendChild(title);
+    li.appendChild(img);
+    readingList.appendChild(li);
+  });
+}
+
+
