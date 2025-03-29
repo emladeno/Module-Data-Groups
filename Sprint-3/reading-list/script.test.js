@@ -47,21 +47,21 @@ describe("Reading list", () => {
       "#reading-list > :first-child"
     );
     expect(firstLi).toContainHTML(
-      `<img src="https://blackwells.co.uk/jacket/l/9780465050659.jpg" />`
+      `<img src="https://blackwells.co.uk/jacket/l/9780465050659.jpg" alt="The Design of Everyday Things cover" />`
     );
 
     const secondLi = page.window.document.querySelector(
       "#reading-list > :nth-child(2)"
     );
     expect(secondLi).toContainHTML(
-      `<img src="https://images-na.ssl-images-amazon.com/images/I/41m1rQjm5tL._SX322_BO1,204,203,200_.jpg" />`
+      `<img src="https://images-na.ssl-images-amazon.com/images/I/41m1rQjm5tL._SX322_BO1,204,203,200_.jpg"  alt="The Most Human Human cover" />`
     );
 
     const thirdLi = page.window.document.querySelector(
       "#reading-list > :nth-child(3)"
     );
     expect(thirdLi).toContainHTML(
-      `<img src="https://blackwells.co.uk/jacket/l/9780135957059.jpg" />`
+      `<img src="https://blackwells.co.uk/jacket/l/9780135957059.jpg"  alt="The Pragmatic Programmer cover" />`
     );
   });
   test("background color changes depending on whether book has been read", () => {
