@@ -1,57 +1,48 @@
 function startCountdown() {
   const input = document.querySelector('#alarmSet');
   const heading = document.querySelector('#timeRemaining');
-  let timeRemaining = parseInt(input.value);
   let countdown;
+  
+  // Set default input value to prevent NaN issue
+  input.value = input.value || 10;
 
-  function updateDisplay() {
-    const minutes = String(Math.floor(timeRemaining / 60)).padStart(2, '0');
-    const seconds = String(timeRemaining % 60).padStart(2, '0');
+  function updateDisplay(time) {
+    const minutes = String(Math.floor(time / 60)).padStart(2, '0');
+    const seconds = String(time % 60).padStart(2, '0');
     heading.innerText = `Time Remaining: ${minutes}:${seconds}`;
   }
 
   function startTimer() {
     clearInterval(countdown);
-    timeRemaining = parseInt(input.value);
-    updateDisplay();
+    let timeRemaining = parseInt(input.value);
+
+    if (isNaN(timeRemaining) || timeRemaining <= 0) {
+      alert("Please enter a valid number greater than 0.");
+      return;
+    }
+
+    updateDisplay(timeRemaining);
 
     countdown = setInterval(() => {
-      if (timeRemaining <= 0) {
+      if (timeRemaining <= 1) { // Adjusted to 1 to avoid delay
         clearInterval(countdown);
+        updateDisplay(0); // Show 00:00 immediately
         playAlarm();
       } else {
         timeRemaining--;
-        updateDisplay();
+        updateDisplay(timeRemaining);
       }
     }, 1000);
   }
 
   document.querySelector('#set').addEventListener('click', startTimer);
-
-  updateDisplay();
+  document.querySelector('#stop').addEventListener('click', pauseAlarm);
+  
+  // Initialize display with default value
+  updateDisplay(parseInt(input.value));
 }
-
-function playAlarm() {
-  const audio = new Audio('alarm.mp3');
-  audio.play();
-}
-
-startCountdown();
-
-
-// DO NOT EDIT BELOW HERE
 
 var audio = new Audio("alarmsound.mp3");
-
-function setup() {
-  document.getElementById("set").addEventListener("click", () => {
-    setAlarm();
-  });
-
-  document.getElementById("stop").addEventListener("click", () => {
-    pauseAlarm();
-  });
-}
 
 function playAlarm() {
   audio.play();
@@ -59,6 +50,14 @@ function playAlarm() {
 
 function pauseAlarm() {
   audio.pause();
+  audio.currentTime = 0; 
 }
 
-window.onload = setup;
+startCountdown();
+
+
+
+
+// DO NOT EDIT BELOW Here
+
+
