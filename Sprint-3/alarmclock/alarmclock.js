@@ -1,7 +1,7 @@
-function startCountdown() {
+
   const input = document.querySelector('#alarmSet');
   const heading = document.querySelector('#timeRemaining');
-  let countdown;
+  let intervalId;
   
   // Set default input value to prevent NaN issue
   input.value = input.value || 10;
@@ -13,7 +13,7 @@ function startCountdown() {
   }
 
   function startTimer() {
-    clearInterval(countdown);
+    clearInterval(intervalId);
     let timeRemaining = parseInt(input.value);
 
     if (isNaN(timeRemaining) || timeRemaining <= 0) {
@@ -23,9 +23,9 @@ function startCountdown() {
 
     updateDisplay(timeRemaining);
 
-    countdown = setInterval(() => {
+    intervalId = setInterval(() => {
       if (timeRemaining <= 1) { // Adjusted to 1 to avoid delay
-        clearInterval(countdown);
+        clearInterval(intervalId);
         updateDisplay(0); // Show 00:00 immediately
         playAlarm();
       } else {
@@ -34,15 +34,12 @@ function startCountdown() {
       }
     }, 1000);
   }
+  var audio = new Audio("alarmsound.mp3");
 
-  document.querySelector('#set').addEventListener('click', startTimer);
-  document.querySelector('#stop').addEventListener('click', pauseAlarm);
   
-  // Initialize display with default value
-  updateDisplay(parseInt(input.value));
-}
 
-var audio = new Audio("alarmsound.mp3");
+
+
 
 function playAlarm() {
   audio.play();
@@ -53,11 +50,14 @@ function pauseAlarm() {
   audio.currentTime = 0; 
 }
 
-startCountdown();
+window.addEventListener("load", () => {
+  document.querySelector('#set').addEventListener('click', startTimer);
+  document.querySelector('#stop').addEventListener('click', pauseAlarm);
+  
 
+  updateDisplay(0);
+});
 
 
 
 // DO NOT EDIT BELOW Here
-
-
