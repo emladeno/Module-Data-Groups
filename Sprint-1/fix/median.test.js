@@ -30,7 +30,7 @@ test("returns correct median for unsorted arrays", () => {
 });
 test("filters non-numeric values", () => {
   expect(calculateMedian([1, "2", 3, null, undefined, "apple", 4])).toEqual(
-    2.5
+    3
   );
   expect(calculateMedian(["apple", 5, 3, "banana", 1, 4, 2])).toEqual(3);
 });
